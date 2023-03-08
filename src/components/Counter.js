@@ -1,13 +1,14 @@
 import { Component } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default class Counter extends Component {
   state = {
     count: 0,
+    step: 2,
   };
   incrementar() {
     this.setState({
-      count: this.state.count + 1,
+      count: this.state.count + this.state.step,
     });
   }
   decrementar() {
@@ -17,9 +18,22 @@ export default class Counter extends Component {
       });
     }
   }
+  alteraStep(text){
+    this.setState({ step: parseInt(text) });
+  }
   render() {
     return (
       <View style={styles.contador}>
+        <TextInput value={this.state.step.toString()}
+        onChange={ (e) => {this.alteraStep(e.nativeEvent.text);
+        } }
+        />
+        <TextInput defaultValue={this.state.step.toString()}
+        onChangeText={(valor) => {
+          this.alteraStep(valor);
+        }}
+        />
+        
         <Text>Contador:{this.state.count}</Text>
         <Button onPress={() => this.incrementar()} title="+" />
         <Button onPress={() => this.decrementar()} title="-" />
