@@ -19,7 +19,7 @@ export default class Counter extends Component {
     }
   }
   alteraStep(text){
-    this.setState({ step: parseInt(text) });
+    this.setState({ step: parseInt(text) || 0 });
   }
   render() {
     return (
